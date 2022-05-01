@@ -1,6 +1,7 @@
 package E_Commerce.BookStore.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -13,7 +14,20 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    public String myAccount(){
+    public String myAccount(Model model){
+        model.addAttribute("classActiveForgetPassword",true);
+        return "myAccount";
+    }
+
+    @GetMapping("/forgetPassword")
+    public String forgetPassword(Model model){
+        model.addAttribute("classActiveForgetPassword",true);
+        return "myAccount";
+    }
+
+    @GetMapping("/newUser")
+    public String newUser(Model model){
+        model.addAttribute("classActiveNewUser",true);
         return "myAccount";
     }
 }
