@@ -5,9 +5,19 @@ spring:
     password: asdfasdf
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  mail:
+    host: smtp.gmail.com
+    username: hyundho12@gmail.com
+    password: voihqvcvrjqnrkfk
+    smtp:
+      socketFactory:
+        port: 465
+        class: javax.net.ssl.SSLSocketFactory
+        fallback: false
+
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         show_sql: true
