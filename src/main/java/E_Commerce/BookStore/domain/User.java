@@ -23,8 +23,8 @@ public class User implements UserDetails{
 
     private String username;
     private String password;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
 
     @Column(name = "email", nullable = false, updatable = false)
     private String email;

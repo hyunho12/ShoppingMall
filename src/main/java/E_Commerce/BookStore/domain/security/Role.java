@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter @Setter
 public class Role {
     @Id
-    private Long roleId;
+    private int roleId;
     private String name;
 
     @OneToMany(mappedBy = "role",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
