@@ -31,20 +31,20 @@ public class User implements UserDetails{
     private String phone;
     private boolean enabled=true;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<UserRole> userRoles = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserPayment> userPaymentList;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserShipping> userShippingList;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private ShoppingCart shoppingCart;
 
 
@@ -57,17 +57,22 @@ public class User implements UserDetails{
     }
 
     @Override
-    public boolean isAccountNonExpired() {
+    public boolean isAccountNonExpired() { // 계정이 만료되지 않았는가?
         return true;
     }
 
     @Override
-    public boolean isAccountNonLocked() {
+    public boolean isAccountNonLocked() { // 계정이 잠기지 않았는가?
         return true;
     }
 
     @Override
-    public boolean isCredentialsNonExpired() {
+    public boolean isCredentialsNonExpired() { // 패스워드가 만료되지 않았는가?
         return true;
+    }
+
+    @Override
+    public boolean isEnabled(){ // 계정이 활성화 되었는가?
+        return enabled;
     }
 }

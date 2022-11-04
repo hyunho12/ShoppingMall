@@ -1,13 +1,12 @@
 package E_Commerce.BookStore.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -16,6 +15,10 @@ public class ShoppingCart {
     private Long id;
     private BigDecimal GrandTotal;
 
-    @OneToOne
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<CartItem> cartItemList;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 }

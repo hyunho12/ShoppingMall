@@ -1,5 +1,6 @@
 package E_Commerce.BookStore.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,5 +35,6 @@ public class Book {
     private MultipartFile bookImage;
 
     @OneToMany(mappedBy = "book")
+    @JsonIgnore
     private List<BookToCartItem> bookToCartItems;
 }

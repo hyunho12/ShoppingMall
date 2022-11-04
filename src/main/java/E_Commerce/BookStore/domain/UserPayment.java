@@ -18,10 +18,12 @@ public class UserPayment {
     private int expiryYear;
     private int cvc;
     private String holderName;
+    private boolean defaultPayment;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(mappedBy = "userPayment", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "userPayment", cascade = CascadeType.ALL, orphanRemoval = true)
     private UserBilling userBilling;
 }
