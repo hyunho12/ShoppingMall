@@ -1,227 +1,128 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0">
 
-<head th:replace="common/header :: common-header" />
+    <title>Home - Shop Admin</title>
 
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}" ></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" ></script>
+</head>
 <body>
-<div th:replace="common/header :: navbar" />
-
-<div class="container">
-    <div class="row banner">
-        <!-- carousel effect -->
-        <div class="col-xs-8">
-            <div class="panel panel-default" style="margin-top: 20px;">
-                <div class="panel-body">
-                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                        </ol>
-
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                <img src="/image/bank.jpg" class="img-responsive" />
-                                <div class="carousel-caption">
-                                    <h4>Foysal Mahmud</h4>
-                                    <p>Studied at Computer Science and Engineering, University of Barisal. </p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img src="/image/library3.jpg" class="img-responsive" />
-                                <div class="carousel-caption">
-                                    <h4>Foysal Mahmud</h4>
-                                    <p>Studied at Computer Science and Engineering, University of Barisal.</p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img src="/image/bank.jpg" class="img-responsive" />
-                                <div class="carousel-caption">
-                                    <h4>Foysal Mahmud</h4>
-                                    <p>Studied at Computer Science and Engineering, University of Barisal.</p>
-                                </div>
-                            </div>
-                            ...
-                        </div>
-
-                        <!-- Controls -->
-                        <a class="left carousel-control" href="#carousel-example-generic" role="button"
-                           data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"
-                                                    aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a> <a class="right carousel-control" href="#carousel-example-generic" role="button"
-                                data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span
-                            class="sr-only">Next</span>
-                    </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-4">
-            <img src="/image/logo.png" class="img-responsive" />
-            <img src="/image/web-dev.jpg" class="img-responsive" />
-        </div>
-
-    </div>
-
-    <hr /> <!-- Horizontal Line -->
-
-
-
-    <div class="row">
-
-        <!-- Three images add side by side -->
-        <div class="col-xs-4">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <a th:href="@{/searchByCategory(category='Programming')}"><img src="/image/programmingBook.png" class="img-responsive" /></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-4">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <a th:href="@{/bookshelf}"><img src="/image/library.png" class="img-responsive" /></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-4">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <a th:href="@{/faq}"><img src="/image/faq.png" class="img-responsive" /></a>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-
-    <br/>
+<div class="container-fluid">
     <div>
-        <div class="home-headline"> <span>Best Seller Books</span></div>
-        <hr style="margin-top: -15px;" />
-    </div>
+        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+            <input type="submit" />
+        </form>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <a class="navbar-brand" th:href="@{/}">
+                <img th:src="@{/images/ShopmeAdminSmall.png}" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="topNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item" sec:authorize="hasAuthority('Admin')">
+                        <a class="nav-link" th:href="@{/users}">Users</a>
+                    </li>
 
+                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                    <li class="nav-item" >
+                        <a class="nav-link" th:href="@{/categories}">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/brands}">Brands</a>
+                    </li>
+                    </th:block>
 
-    <div class="row">
-        <div id="top-product" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#top-product" data-slide-to="0" class="active"></li>
-                <li data-target="#top-product" data-slide-to="1"></li>
-                <li data-target="#top-product" data-slide-to="2"></li>
-            </ol>
+                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson','Editor', 'Shipper')">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/products}">Products</a>
+                    </li>
+                    </th:block>
 
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="/image/shelf.png" class="img-responsive" />
-                    <div class="carousel-caption">
-                        <div class="row">
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=46}"><img class="img-responsive" src="/image/book1.png" /></a>
-                            </div>
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=49}"><img class="img-responsive" src="/image/book2.png" /></a>
-                            </div>
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=152}"><img class="img-responsive" src="/image/book3.png" /></a>
-                            </div>
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=50}"><img class="img-responsive" src="/image/book4.png" /></a>
-                            </div>
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=153}"><img class="img-responsive" src="/image/book5.png" /></a>
-                            </div>
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=48}"><img class="img-responsive" src="/image/book6.png" /></a>
-                            </div>
+                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+                    <li class="nav-item" >
+                        <a class="nav-link" th:href="@{/customers}">Customers</a>
+                    </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/shipping}">Shipping</a>
+                    </li>
+                    </th:block>
+
+                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Shipper')">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/orders}">Orders</a>
+                    </li>
+                    </th:block>
+
+                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/report}">Sales Report</a>
+                    </li>
+                    </th:block>
+
+                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/articles}">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/menus}">Menus</a>
+                    </li>
+                    </th:block>
+
+                    <li class="nav-item" sec:authorize="hasAuthority('Admin')">
+                        <a class="nav-link" th:href="@{/settings}">Settings</a>
+                    </li>
+                    <li>
+                        <span class="fas fa-user fa-2x icon-silver"></span>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link"
+                           th:href="@{/account}"
+                           sec:authentication="principal.fullname">
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" id="LogoutLink" href="">Logout</a>
                         </div>
-                    </div>
-                </div>
+                    </li>
 
-                <div class="item">
-                    <img src="/image/shelf.png" class="img-responsive" />
-                    <div class="carousel-caption">
-                        <div class="row">
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=46}"><img class="img-responsive" src="/image/book1.png" /></a>
-                            </div>
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=49}"><img class="img-responsive" src="/image/book2.png" /></a>
-                            </div>
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=153}"><img class="img-responsive" src="/image/book5.png" /></a>
-                            </div>
 
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=50}"><img class="img-responsive" src="/image/book4.png" /></a>
-                            </div>
-
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=48}"><img class="img-responsive" src="/image/book6.png" /></a>
-                            </div>
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=152}"><img class="img-responsive" src="/image/book3.png" /></a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="/image/shelf.png" class="img-responsive" />
-                    <div class="carousel-caption">
-                        <div class="row">
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=46}"><img class="img-responsive" src="/image/book1.png" /></a>
-                            </div>
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=49}"><img class="img-responsive" src="/image/book2.png" /></a>
-                            </div>
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=152}"><img class="img-responsive" src="/image/book3.png" /></a>
-                            </div>
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=50}"><img class="img-responsive" src="/image/book4.png" /></a>
-                            </div>
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=153}"><img class="img-responsive" src="/image/book5.png" /></a>
-                            </div>
-                            <div class="col-xs-2">
-                                <a th:href="@{/bookDetail?id=48}"><img class="img-responsive" src="/image/book6.png" /></a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                </ul>
             </div>
 
-            <!-- Controls -->
-            <a class="left carousel-control" href="#top-product"
-               role="button" data-slide="prev"> <span
-                    class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a> <a class="right carousel-control" href="#top-product"
-                    role="button" data-slide="next"> <span
-                class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-        </div>
+        </nav>
+    </div>
+
+    <div>
+        <h2>Shop Control Panel</h2>
+        환영합니다!!
+        <a th:href="@{/account}"
+           sec:authentication="principal.fullname"></a>
+        <span sec:authentication="principal.authorities"></span>
+    </div>
+
+    <div>
+        <p>Shop Control Panel - Copyright &copy; KHH</p>
     </div>
 
 </div>
-<!-- end of container -->
-
-<div th:replace="common/header :: footer"/>
-
-<div th:replace="common/header :: body-bottom-scripts" />
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#logoutLink").on("click", function(e) {
+			e.preventDefault();
+			document.logoutForm.submit();
+		});
+	});
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
-
 </html>
