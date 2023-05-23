@@ -19,3 +19,26 @@
 
 ### 구현 페이지
 
+## 관리자 페이지
+```
+ + 관리자 메인페이지 구현
+ + 회원 검색, 정렬, 페이징 ,수정, 삭제 기능 구현
+```
+<details>
+<summary>더보기</summary>
+
+![관리자메인페이지](https://github.com/hyunho12/ShoppingMall/assets/63361993/7a74e63d-ef7f-4ee8-9792-3e604b9ac1f6)
+
+  회원관리 페이지
+![유저관리-gif-maker](https://github.com/hyunho12/ShoppingMall/assets/63361993/6850c4d3-0c4f-4c17-b909-7ee088ff2c3c)
+
+  회원생성 기능
+![신규유저생성-gif-maker](https://github.com/hyunho12/ShoppingMall/assets/63361993/15b18b9f-10bf-4703-9a4a-fdf28291a3f1)
+
+  회원검색 기능
+![유저검색-gif-maker](https://github.com/hyunho12/ShoppingMall/assets/63361993/b6e08ae1-e101-4151-accb-739eed0fdedb)
+
+  회원 수정, 삭제 기능
+![유저수정삭제-gif-maker](https://github.com/hyunho12/ShoppingMall/assets/63361993/8825f3c8-a35f-4e7f-b0e5-a91679c37aff)
+  
+</details>
