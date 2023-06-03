@@ -51,7 +51,7 @@ public class MemberService {
     }
 
     public List<Member> listAll(){
-        return (List<Member>) memberRepository.findAll();
+        return (List<Member>) memberRepository.findAll(Sort.by("firstName").ascending());
     }
 
     public Page<Member> listByPage(int pageNum, String sortField, String sortDir, String keyword){
