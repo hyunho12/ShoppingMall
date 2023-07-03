@@ -13,7 +13,7 @@
 + QA 보조 : 질문,리뷰 관리
 
 ### DB ERD - 설계도
-![ecommerce_erd](https://user-images.githubusercontent.com/63361993/229774739-52c15443-6d75-4f40-9558-53553d521fca.png)
+![erd](https://github.com/hyunho12/ShoppingMall/assets/63361993/7280bb22-a38a-40d3-bac9-cc3017bb49cc)
 
 -------------------------------------------------------------------
 
