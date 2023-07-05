@@ -33,13 +33,12 @@ public class Category {
     @OneToMany(mappedBy = "parent")
     private Set<Category> child = new HashSet<>();
 
-    @OneToMany(mappedBy = "category")
-    private Set<BrandCategory> brandCategories = new HashSet<>();
-
     private boolean hasChildren;
 
-    public void addBrandCategory(BrandCategory brandCategory){
-        //brandCategories.add(brandCategory);
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private Set<BrandCategory> brandCategories = new HashSet<>();
+
+    public void addCategory(BrandCategory brandCategory){
         this.brandCategories.add(brandCategory);
         brandCategory.setCategory(this);
     }

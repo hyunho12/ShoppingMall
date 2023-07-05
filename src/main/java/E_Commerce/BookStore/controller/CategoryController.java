@@ -45,17 +45,25 @@ public class CategoryController {
         CategoryPageInfo pageInfo = new CategoryPageInfo();
         List<Category> listCategories = categoryService.listByPage(sortDir, pageNum, pageInfo, keyword);
 
+        long startCount = (pageNum - 1) * CategoryService.ROOT_CATEGORIES_PER_PAGE + 1;
+        long endCount = startCount + CategoryService.ROOT_CATEGORIES_PER_PAGE - 1;
+        if (endCount > pageInfo.getTotalElements()) {
+            endCount = pageInfo.getTotalElements();
+        }
 
-        String reverseCategories = sortDir.equals("asc") ? "desc" : "asc";
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 
         model.addAttribute("totalPages", pageInfo.getTotalPages());
         model.addAttribute("totalItems", pageInfo.getTotalElements());
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("sortField", "name");
         model.addAttribute("sortDir", sortDir);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("startCount", startCount);
+        model.addAttribute("endCount", endCount);
 
         model.addAttribute("listCategories", listCategories);
-        model.addAttribute("reverseCategories", reverseCategories);
+        model.addAttribute("reverseSortDir", reverseSortDir);
 
         return "categories/categories";
     }
@@ -89,7 +97,7 @@ public class CategoryController {
             categoryService.save(category);
         }
 
-        redirectAttributes.addFlashAttribute("message", "The category has been saved successfully!");
+        redirectAttributes.addFlashAttribute("message", "카테고리가 성공적으로 저장되었습니다!");
         return "redirect:/categories";
     }
 
@@ -116,7 +124,7 @@ public class CategoryController {
                                               RedirectAttributes redirectAttributes){
         categoryService.updateCategoryEnabledStatus(id, enabled);
         String status = enabled ? "enabled" : "disabled";
-        String message = "The Category ID " + id + "has been" + status;
+        String message = "The Category ID " + id + " has been " + status;
         redirectAttributes.addFlashAttribute("message", message);
 
         return "redirect:/categories";
@@ -129,8 +137,8 @@ public class CategoryController {
             String categoryDir = "../category-images/" + id;
             FileUploadUtil.removeDir(categoryDir);
 
-            redirectAttributes.addFlashAttribute("message", "The Category ID "
-                    + id + "has been deleted successfully");
+            redirectAttributes.addFlashAttribute("message", "카테고리 ID "
+                    + id + "가 성공적으로 삭제되었습니다.");
         } catch (CategoryNotFoundException ex){
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
         }

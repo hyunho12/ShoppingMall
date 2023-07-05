@@ -47,7 +47,7 @@ public class CategoryService {
         List<Category> rootCategories = pageCategories.getContent();
 
         pageInfo.setTotalPages(pageCategories.getTotalPages());
-        pageInfo.setTotalElements(pageInfo.getTotalElements());
+        pageInfo.setTotalElements(pageCategories.getTotalElements());
 
         if(keyword != null && !keyword.isEmpty()){
             List<Category> searchResult = pageCategories.getContent();
@@ -55,7 +55,7 @@ public class CategoryService {
                 category.setHasChildren(category.getChild().size() > 0);
             }
 
-            return  searchResult;
+            return searchResult;
         }
         else{
             return listHierarchicalCategories(rootCategories, sortDir);

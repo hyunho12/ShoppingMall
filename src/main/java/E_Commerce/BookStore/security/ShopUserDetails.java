@@ -13,6 +13,8 @@ import java.util.Set;
 
 public class ShopUserDetails implements UserDetails {
 
+    private static final long serialVersionUID = 1L;
+
     private Member member;
 
     public ShopUserDetails(Member member) {
@@ -72,5 +74,9 @@ public class ShopUserDetails implements UserDetails {
 
     public void setLastName(String lastName){
         this.member.setLastName(lastName);
+    }
+
+    public boolean hasRole(String roleName) {
+        return member.hasRole(roleName);
     }
 }

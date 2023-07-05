@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head(${pageTitle})" />
+<head th:replace="fragments :: page_head(${pageTitle}, 'none')" />
 <body>
 <div class="container-fluid">
     <div th:replace="navigation :: menu"></div>
     <div>
         <h2>카테고리 관리 | [[${pageTitle}]]</h2>
     </div>
-
+<!--    onsubmit="return checkUnique(this)"-->
     <form th:action="@{/categories/save}" method="post" style="max-width: 500px; margin: 0 auto"
           enctype="multipart/form-data"
-          onsubmit="return checkUnique(this)"
           th:object="${category}">
         <input type="hidden" th:field="*{id}" />
         <div class="border border-secondary rounded p-3">
@@ -94,6 +93,7 @@
 
 </div>
 <script type="text/javascript">
+    MAX_FILE_SIZE = 502400;
 	moduleURL = "[[@{/categories}]]";
 
 function checkUnique(form) {
@@ -107,7 +107,8 @@ function checkUnique(form) {
 
 		params = {id: catId, name: catName, alias: catAlias, _csrf: csrfValue};
 
-		$.post(url, params, function(response) {
+		$.post(url, params, function(response)
+		{
 			if (response == "OK") {
 				form.submit();
 			} else if (response == "Duplicate Name") {

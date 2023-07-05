@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="page_head(title)">
+<head th:fragment="page_head(title, remove)" th:remove="${remove}">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0">
     <title>[[${title}]]</title>
@@ -14,13 +14,13 @@
 </head>
 <body>
 <div th:fragment="footer" class="text-center m-3">
-    <p>Shopme Control Panel - Copyright &copy; Shopme</p>
+    <p>KHHShop - Copyright &copy; 김현호</p>
 </div>
-
 
 <th th:fragment="column_link(moduleURL, fieldName, columnLabel, removeTag)" th:remove="${removeTag}">
     <a class="text-white"
-       th:href="@{${moduleURL} + '/page/' + ${currentPage} + '?sortField=' + ${fieldName}  +'&sortDir=' + ${sortField != fieldName ? sortDir : reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
+       th:href="@{${moduleURL} + '/page/' + ${currentPage} + '?sortField=' + ${fieldName} +'&sortDir=' + ${sortField !=
+        fieldName ? sortDir : reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
         [[${columnLabel}]]
     </a>
     <span th:if="${sortField == fieldName}"
@@ -37,11 +37,13 @@
          style="width: 100px"/>
 </div>
 
+
 <div th:fragment="status(enabled, entityName, entityURL)" th:remove="tag">
     <a th:if="${enabled == true}" class="fas fa-check-circle fa-2x icon-green"
        th:href="@{${entityURL} + '/enabled/false'}"
        th:title="'Disable this ' + ${entityName}"
     ></a>
+
 
     <a th:if="${enabled == false}" class="fas fa-circle fa-2x icon-dark"
        th:href="@{${entityURL} + '/enabled/true'}"
@@ -49,12 +51,10 @@
     ></a>
 </div>
 
-
 <div th:fragment="edit(entityName, editURL)" th:remove="tag">
     <a class="fas fa-edit fa-2x icon-green" th:href="@{${editURL}}"
        th:title="'Edit this ' + ${entityName}"></a>
 </div>
-
 
 <div th:fragment="delete(entityName, entityId, deleteURL, visible)" th:remove="tag">
     <th:block th:if="${visible}">
@@ -99,7 +99,6 @@
         </nav>
     </div>
 </div>
-
 
 <div th:fragment="search_form_and_message(moduleURL)">
     <form th:action="@{${moduleURL}}" class="form-inline m-3">
