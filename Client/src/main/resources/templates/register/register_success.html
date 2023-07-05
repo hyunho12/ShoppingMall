@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head(${pageTitle}, 'none')" />
+<body>
+<div class="container-fluid">
+    <div th:replace="navigation :: header_menu"></div>
+
+    <div>&nbsp;</div>
+
+    <div class="text-center">
+        <h2>Customer Registration</h2>
+        <h4>고객등록이 성공적으로 완료되었습니다.</h4>
+        <p>이메일을 확인하여 계정을 확인하십시오.</p>
+        <p><a th:href="@{/login}">Login here</a></p>
+    </div>
+
+    <div>&nbsp;</div>
+
+    <div th:replace="navigation :: footer_menu"></div>
+</div>
+</body>
+</html>
