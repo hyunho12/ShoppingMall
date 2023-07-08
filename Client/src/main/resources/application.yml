@@ -15,22 +15,7 @@ spring:
         format_sql: true
       show_sql: true
 
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: 1019548156922-3sepgt95f85j4uaublelqg1rh8jfdb63.apps.googleusercontent.com
-            client-secret: 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
-            scope:
-              - email
-              - profile
-          facebook:
-            client-id: 278774797989190
-            client-secret: da99c5ce63211968675eedd074c410b0
-            scope:
-              - email
-              - public_profile
+
 
 logging.level:
   org.hibernate.SQL: debug
